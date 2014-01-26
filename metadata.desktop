@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Krunner (g)Vim Session Plugin
 Name[it]=Krunner Plugin per le sessioni di (g)Vim
-Comment=Simple Python plugin to load (g)Vim session using Krunner
+Comment=Matches (g)Vim Sessions
 Type=Service
 Icon=vim
 ServiceTypes=Plasma/Runner
