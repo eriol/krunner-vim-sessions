@@ -24,16 +24,22 @@ class VimRunner(plasmascript.Runner):
         if not query.startsWith('vim'):
             return
 
+        # Search only after the fourth character.
+        query = query[4:]
+        query = query.trimmed()
+
         for _, _, sessions in os.walk(DEFAULT_SESSION_DIRECTORY):
             for session in sessions:
                 session = session[:-4]
-                m = Plasma.QueryMatch(self.runner)
-                m.setText(session)
-                m.setSubtext('Open (g)Vim session')
-                m.setType(Plasma.QueryMatch.ExactMatch)
-                m.setIcon(KIcon('vim'))
-                m.setData(session)
-                context.addMatch(session, m)
+                # Search is case insensitive.
+                if str(query).lower() in session.lower():
+                    m = Plasma.QueryMatch(self.runner)
+                    m.setText(session)
+                    m.setSubtext('Open (g)Vim session')
+                    m.setType(Plasma.QueryMatch.ExactMatch)
+                    m.setIcon(KIcon('vim'))
+                    m.setData(session)
+                    context.addMatch(session, m)
 
     def run(self, context, match):
         if match.data():
