@@ -30,6 +30,9 @@ class VimRunner(plasmascript.Runner):
 
         for _, _, sessions in os.walk(DEFAULT_SESSION_DIRECTORY):
             for session in sessions:
+                # Skip lock files.
+                if session.endswith('.lock'):
+                    continue
                 session = session[:-4]
                 # Search is case insensitive.
                 if str(query).lower() in session.lower():
