@@ -1,7 +1,7 @@
 [Desktop Entry]
-Name=Krunner (g)Vim Session Plugin
-Name[it]=Krunner Plugin per le sessioni di (g)Vim
-Comment=Matches (g)Vim Sessions
+Name=Krunner Vim Session Plugin
+Name[it]=Krunner Plugin per le sessioni di Vim
+Comment=Matches Vim Sessions
 Type=Service
 Icon=vim
 ServiceTypes=Plasma/Runner
@@ -9,8 +9,8 @@ X-Plasma-API=python
 X-Plasma-MainScript=code/main.py
 X-KDE-PluginInfo-Author=Daniele Tricoli
 X-KDE-PluginInfo-Email=eriol@mornie.org
-X-KDE-PluginInfo-Name=vim_krunner_plugin
+X-KDE-PluginInfo-Name=krunner-vim-session
 X-KDE-PluginInfo-Version=0.1
-X-KDE-PluginInfo-Website=http://mornie.org/projects/vim-krunner-plugin/
+X-KDE-PluginInfo-Website=http://mornie.org/projects/krunner-vim-session/
 X-KDE-PluginInfo-License=LGPLv3
 X-KDE-PluginInfo-EnabledByDefault=true
