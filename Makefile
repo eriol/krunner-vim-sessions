@@ -1,6 +1,7 @@
 PLUGIN_NAME = $(shell grep X-KDE-PluginInfo-Name plugin/metadata.desktop | cut -d = -f 2)
+PLUGIN_VERSION = $(shell grep X-KDE-PluginInfo-Version plugin/metadata.desktop | cut -d = -f 2)
 DIST_DIR = dist
-PLUGIN_ARCHIVE_ZIP = $(PLUGIN_NAME).zip
+PLUGIN_ARCHIVE_ZIP = $(PLUGIN_NAME)-$(PLUGIN_VERSION).zip
 
 .PHONY: clean install uninstall reinstall
 
