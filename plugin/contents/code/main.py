@@ -13,18 +13,27 @@ DEFAULT_SESSION_DIRECTORY = os.path.expanduser(DEFAULT_SESSION_DIRECTORY)
 class VimRunner(plasmascript.Runner):
 
     def init(self):
-        self.addSyntax(Plasma.RunnerSyntax('vim',
-                                           'Start Vim using a session.'))
+        self.addSyntax(Plasma.RunnerSyntax('vim :s:',
+                                           'Start Vim using :s: session.'))
 
     def match(self, context):
         if not context.isValid():
             return
 
         query = context.query()
+
+        # Don't use query.startsWith('vim ') because we want the
+        # list of all sessions to show up once inserted 'vim'.
+        # The space between plugin keywork and text query must be
+        # handled manually.
         if not query.startsWith('vim'):
             return
+        try:
+            if query[3] != ' ':
+                return
+        except IndexError:
+            pass
 
-        # Search only after the fourth character.
         query = query[4:]
         query = query.trimmed()
 
