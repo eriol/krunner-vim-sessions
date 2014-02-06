@@ -44,19 +44,30 @@ class VimRunner(plasmascript.Runner):
 
         for _, _, sessions in os.walk(DEFAULT_SESSION_DIRECTORY):
             for session in sessions:
+
+                match = Plasma.QueryMatch(self.runner)
+
                 # Skip lock files.
                 if session.endswith('.lock'):
                     continue
-                session = session[:-4]
+
+                # Trim .vim extension.
+                session = QtCore.QString(session[:-4])
+
                 # Search is case insensitive.
-                if str(query).lower() in session.lower():
-                    m = Plasma.QueryMatch(self.runner)
-                    m.setText(session)
-                    m.setSubtext('Open Vim session')
-                    m.setType(Plasma.QueryMatch.ExactMatch)
-                    m.setIcon(KIcon('vim'))
-                    m.setData(session)
-                    context.addMatch(session, m)
+                if session.contains(query, QtCore.Qt.CaseInsensitive):
+                    match.setText(session)
+                    match.setSubtext('Open Vim session')
+                    match.setType(Plasma.QueryMatch.ExactMatch)
+                    match.setIcon(KIcon('vim'))
+                    match.setData(session)
+                    if session.compare(query,
+                                       QtCore.Qt.CaseInsensitive) == 0:
+                        match.setRelevance(1.0)
+                    else:
+                        match.setRelevance(0.8)
+
+                    context.addMatch(session, match)
 
     def createRunOptions(self, widget):
         layout = QtGui.QVBoxLayout(widget)
