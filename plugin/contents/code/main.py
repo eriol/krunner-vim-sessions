@@ -47,7 +47,7 @@ class VimRunner(plasmascript.Runner):
                 if str(query).lower() in session.lower():
                     m = Plasma.QueryMatch(self.runner)
                     m.setText(session)
-                    m.setSubtext('Open (g)Vim session')
+                    m.setSubtext('Open Vim session')
                     m.setType(Plasma.QueryMatch.ExactMatch)
                     m.setIcon(KIcon('vim'))
                     m.setData(session)
