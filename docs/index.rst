@@ -16,3 +16,4 @@ Contents:
    :maxdepth: 2
 
    installing
+   getting_started
