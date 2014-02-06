@@ -3,8 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to krunner-vim-sessions's documentation!
-================================================
+Welcome to krunner-vim-sessions' documentation!
+===============================================
 
 ``krunner-vim-sessions`` is a `KRunner`_ plugin to handle Vim sessions.
 
