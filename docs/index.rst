@@ -17,3 +17,4 @@ Contents:
 
    installing
    getting_started
+   changelog
