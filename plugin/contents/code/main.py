@@ -3,8 +3,12 @@
 import os
 
 from PyKDE4 import plasmascript
-from PyKDE4.plasma import Plasma
+from PyKDE4.kdecore import KToolInvocation
 from PyKDE4.kdeui import KIcon
+from PyKDE4.plasma import Plasma
+
+from PyQt4 import QtGui
+from PyQt4 import QtCore
 
 DEFAULT_SESSION_DIRECTORY = '~/.vim/sessions/'
 DEFAULT_SESSION_DIRECTORY = os.path.expanduser(DEFAULT_SESSION_DIRECTORY)
@@ -15,6 +19,8 @@ class VimRunner(plasmascript.Runner):
     def init(self):
         self.addSyntax(Plasma.RunnerSyntax('vim :s:',
                                            'Start Vim using :s: session.'))
+        self.setHasRunOptions(True)
+        self.runInTerminal = False
 
     def match(self, context):
         if not context.isValid():
@@ -53,13 +59,29 @@ class VimRunner(plasmascript.Runner):
                     m.setData(session)
                     context.addMatch(session, m)
 
+    def createRunOptions(self, widget):
+        layout = QtGui.QVBoxLayout(widget)
+        inTerminal = QtGui.QCheckBox('Start Vim inside terminal?',
+                                     widget)
+        inTerminal.stateChanged.connect(self.handleStateChanged)
+        layout.addWidget(inTerminal)
+
+        return layout
+
+    def handleStateChanged(self, state):
+        self.runInTerminal = state == QtCore.Qt.Checked
+
     def run(self, context, match):
         if match.data():
             args = '--servername %s' % match.data().toString()
         else:
             args = ''
 
-        os.system(' '.join(['gvim', args]))
+        if self.runInTerminal:
+            KToolInvocation.invokeTerminal(' '.join(['vim', args]))
+            self.runInTerminal = False
+        else:
+            os.system(' '.join(['gvim', args]))
 
 
 def CreateRunner(parent):
