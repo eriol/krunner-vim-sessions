@@ -18,3 +18,8 @@ Contents:
    installing
    getting_started
    changelog
+   licensing
+
+:Release: |version|
+:Date: February 07, 2014
+
