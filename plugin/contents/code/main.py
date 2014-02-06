@@ -31,7 +31,7 @@ class VimRunner(plasmascript.Runner):
         # list of all sessions to show up once inserted 'vim'.
         # The space between plugin keywork and text query must be
         # handled manually.
-        if not query.startsWith('vim'):
+        if not query.startsWith('vim', QtCore.Qt.CaseInsensitive):
             return
         try:
             if query[3] != ' ':
