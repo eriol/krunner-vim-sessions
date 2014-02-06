@@ -8,7 +8,7 @@ from PyKDE4.kdeui import KIcon
 from PyKDE4.plasma import Plasma
 
 from PyQt4 import QtGui
-from PyQt4 import QtCore
+from PyQt4.QtCore import Qt, QString
 
 DEFAULT_SESSION_DIRECTORY = os.path.expanduser('~/.vim/sessions/')
 
@@ -31,7 +31,7 @@ class VimRunner(plasmascript.Runner):
         # list of all sessions to show up once inserted 'vim'.
         # The space between plugin keywork and text query must be
         # handled manually.
-        if not query.startsWith('vim', QtCore.Qt.CaseInsensitive):
+        if not query.startsWith('vim', Qt.CaseInsensitive):
             return
         try:
             if query[3] != ' ':
@@ -52,17 +52,16 @@ class VimRunner(plasmascript.Runner):
                     continue
 
                 # Trim .vim extension.
-                session = QtCore.QString(session[:-4])
+                session = QString(session[:-4])
 
                 # Search is case insensitive.
-                if session.contains(query, QtCore.Qt.CaseInsensitive):
+                if session.contains(query, Qt.CaseInsensitive):
                     match.setText(session)
                     match.setSubtext('Open Vim session')
                     match.setType(Plasma.QueryMatch.ExactMatch)
                     match.setIcon(KIcon('vim'))
                     match.setData(session)
-                    if session.compare(query,
-                                       QtCore.Qt.CaseInsensitive) == 0:
+                    if session.compare(query, Qt.CaseInsensitive) == 0:
                         match.setRelevance(1.0)
                     else:
                         match.setRelevance(0.8)
@@ -79,7 +78,7 @@ class VimRunner(plasmascript.Runner):
         return layout
 
     def handleStateChanged(self, state):
-        self.runInTerminal = state == QtCore.Qt.Checked
+        self.runInTerminal = state == Qt.Checked
 
     def run(self, context, match):
         if match.data():
