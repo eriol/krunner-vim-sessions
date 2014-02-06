@@ -87,7 +87,7 @@ class VimRunner(plasmascript.Runner):
 
     def createRunOptions(self, widget):
         layout = QtGui.QVBoxLayout(widget)
-        inTerminal = QtGui.QCheckBox('Start Vim inside terminal?',
+        inTerminal = QtGui.QCheckBox('Start Vim inside a terminal',
                                      widget)
         inTerminal.stateChanged.connect(self.handleStateChanged)
         layout.addWidget(inTerminal)
