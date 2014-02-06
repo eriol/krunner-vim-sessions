@@ -10,8 +10,7 @@ from PyKDE4.plasma import Plasma
 from PyQt4 import QtGui
 from PyQt4 import QtCore
 
-DEFAULT_SESSION_DIRECTORY = '~/.vim/sessions/'
-DEFAULT_SESSION_DIRECTORY = os.path.expanduser(DEFAULT_SESSION_DIRECTORY)
+DEFAULT_SESSION_DIRECTORY = os.path.expanduser('~/.vim/sessions/')
 
 
 class VimRunner(plasmascript.Runner):
