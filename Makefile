@@ -2,7 +2,7 @@ PLUGIN_NAME = $(shell grep X-KDE-PluginInfo-Name plugin/metadata.desktop | cut -
 DIST_DIR = dist
 PLUGIN_ARCHIVE_ZIP = $(PLUGIN_NAME).zip
 
-.PHONY: clean install uninstall
+.PHONY: clean install uninstall, reinstall
 
 dist:
 	if [ ! -d $(DIST_DIR) ]; then mkdir $(DIST_DIR); fi
@@ -20,3 +20,5 @@ install: dist
 
 uninstall:
 	plasmapkg --type runner --remove $(PLUGIN_NAME)
+
+reinstall: uninstall clean install
